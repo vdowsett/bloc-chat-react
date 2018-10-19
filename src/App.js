@@ -16,6 +16,7 @@ import RoomList from './components/RoomList';
 
 
 class App extends Component {
+
   render() {
     return (
       <div className="App">
@@ -23,16 +24,14 @@ class App extends Component {
 
         </header>
 
-        <body>
+        <div>
           <section id="sidebar">
             <h1>Chat App</h1>
-            <ul>
-              <RoomList />
-            </ul>
+              <RoomList firebase={firebase}/>
           </section>
           <section id="mainBody"></section>
 
-        </body>
+        </div>
       </div>
     );
   }
