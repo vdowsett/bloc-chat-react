@@ -31,14 +31,12 @@ class RoomList extends Component {
   }
 
   createRoom(e) {
-        e.preventDefault();
+    e.preventDefault();
     const newRoom = this.state.newRoom;
-    const newKey = parseInt(this.state.rooms.index + 1);
-    console.log("New Key Value" + newKey);
-    const addNewRoom = this.setState({ rooms: this.state.rooms.concat({ name: newRoom, key: newKey}) })
+    const roomArray = this.state.rooms;
+    this.setState({ rooms: this.state.rooms.concat({ name: newRoom }) })
     console.log(this.state.rooms);
   }
-
 
   render() {
 
@@ -48,11 +46,11 @@ class RoomList extends Component {
       <div id="roomList">
         <ul>
           { this.state.rooms.map( ( room, index ) =>
-          <li key={index}> { room.name} </li>
+          <li key={index}> { room.name } </li>
           )}
         </ul>
 
-        <form onSubmit={this.createRoom} >
+        <form onSubmit={ this.createRoom } >
           <input
             typle="text"
             default="Room Name"
