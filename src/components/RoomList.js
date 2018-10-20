@@ -33,7 +33,10 @@ class RoomList extends Component {
   createRoom(e) {
     e.preventDefault();
     const newRoom = this.state.newRoom;
-    const roomArray = this.state.rooms;
+    //const roomArray = this.state.rooms;
+    this.roomsRef.push({
+      name: newRoom
+    })
     this.setState({ rooms: this.state.rooms.concat({ name: newRoom }) })
     console.log(this.state.rooms);
   }
