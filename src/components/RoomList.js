@@ -39,7 +39,10 @@ class RoomList extends Component {
     })
     this.setState({ rooms: this.state.rooms.concat({ name: newRoom }) })
     console.log(this.state.rooms);
+    this.setState({ newRoom: ""  });
   }
+
+
 
   render() {
 
@@ -53,7 +56,7 @@ class RoomList extends Component {
           )}
         </ul>
 
-        <form onSubmit={ this.createRoom } >
+        <form onSubmit={ this.createRoom } id="create-rrom">
           <input
             typle="text"
             default="Room Name"
