@@ -3,6 +3,7 @@ import './App.css';
 import * as firebase from 'firebase';
 import RoomList from './components/RoomList';
 import MessageList from './components/MessageList';
+import User from './components/User';
 
 
   // Initialize Firebase
@@ -24,10 +25,13 @@ class App extends Component {
   this.state = {
     activeRoom: "",
     activeRoomKey: null,
+    user: "",
     };
 
     this.roomsRef = firebase.database().ref('rooms');
     this.handleRoomClick = this.handleRoomClick.bind(this);
+    this.setUser = this.setUser.bind(this);
+
   };
 
   componentDidMount() {
@@ -39,16 +43,21 @@ class App extends Component {
        this.setState({activeRoomKey: room.key});
        console.log("name: " + room.name + ", key: " + room.key);
 
-       console.log("Active Room Name:" + this.state.activeRoom)
-       console.log("Active Room Key:" + this.state.activeRoomKey)
+       console.log("Active Room Name:" + this.state.activeRoom);
+       console.log("Active Room Key:" + this.state.activeRoomKey);
      });
   }
 
   handleRoomClick = (room) => {
     this.setState({activeRoom: room.name});
     this.setState({activeRoomKey: room.key});
-    console.log("Active Room Name:" + this.state.activeRoom)
-    console.log("Active Room Key:" + this.state.activeRoomKey)
+    console.log("Active Room Name:" + this.state.activeRoom);
+    console.log("Active Room Key:" + this.state.activeRoomKey);
+   }
+
+   setUser = (user) => {
+     this.setState( { user: this.state.user });
+     console.log("User:" + this.state.user);
    }
 
   render() {
@@ -68,6 +77,11 @@ class App extends Component {
             firebase={firebase}
             activeRoom={this.state.activeRoom}
             activeRoomKey={this.state.activeRoomKey}
+          />
+
+          <User
+            firebase={firebase}
+            setUser={this.state.setUser}
           />
 
       </div>
