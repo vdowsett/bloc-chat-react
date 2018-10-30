@@ -25,7 +25,7 @@ class App extends Component {
   this.state = {
     activeRoom: "",
     activeRoomKey: null,
-    user: "",
+    user: null,
     };
 
     this.roomsRef = firebase.database().ref('rooms');
@@ -55,14 +55,14 @@ class App extends Component {
     console.log("Active Room Key:" + this.state.activeRoomKey);
    }
 
-   setUser = (user) => {
-     this.setState( { user: this.state.user });
-     console.log("User:" + this.state.user);
-   }
+  setUser(user) {
+    this.setState({ user : user });
+  }
 
   render() {
 
-    console.log(this.state.activeRoom);
+    console.log("Rendered Active Room " + this.state.activeRoom);
+    console.log("Rendered current user " + this.state.user);
 
     return (
       <div className="App">
@@ -81,7 +81,8 @@ class App extends Component {
 
           <User
             firebase={firebase}
-            setUser={this.state.setUser}
+            setUser={this.setUser}
+            user={this.state.user}
           />
 
       </div>
