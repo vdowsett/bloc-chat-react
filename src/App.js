@@ -41,18 +41,12 @@ class App extends Component {
        room.key = snapshot.key;
        this.setState({activeRoom: room.name});
        this.setState({activeRoomKey: room.key});
-       console.log("name: " + room.name + ", key: " + room.key);
-
-       console.log("Active Room Name:" + this.state.activeRoom);
-       console.log("Active Room Key:" + this.state.activeRoomKey);
      });
   }
 
   handleRoomClick = (room) => {
     this.setState({activeRoom: room.name});
     this.setState({activeRoomKey: room.key});
-    console.log("Active Room Name:" + this.state.activeRoom);
-    console.log("Active Room Key:" + this.state.activeRoomKey);
    }
 
   setUser(user) {
@@ -60,9 +54,6 @@ class App extends Component {
   }
 
   render() {
-
-    console.log("Rendered Active Room " + this.state.activeRoom);
-    console.log("Rendered current user " + this.state.user);
 
     return (
       <div className="App">
@@ -77,6 +68,7 @@ class App extends Component {
             firebase={firebase}
             activeRoom={this.state.activeRoom}
             activeRoomKey={this.state.activeRoomKey}
+            user={this.state.user}
           />
 
           <User

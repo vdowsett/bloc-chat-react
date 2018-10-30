@@ -21,7 +21,6 @@ class RoomList extends Component {
        const room = snapshot.val();
        room.key = snapshot.key;
        this.setState({ rooms: this.state.rooms.concat( room ) })
-       console.log("name: " + room.name + ", key: " + room.key);
      });
   }
 
@@ -37,7 +36,6 @@ class RoomList extends Component {
       name: newRoom
     })
     this.setState({ rooms: this.state.rooms.concat({ name: newRoom }) })
-    console.log(this.state.rooms);
     this.setState({ newRoom: ""  });
   }
 
@@ -53,7 +51,7 @@ class RoomList extends Component {
           )}
         </ul>
 
-        <form onSubmit={ this.createRoom } id="create-rrom">
+        <form onSubmit={ this.createRoom } id="create-room">
           <input
             typle="text"
             default="Room Name"
