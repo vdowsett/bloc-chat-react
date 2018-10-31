@@ -61,6 +61,7 @@ class App extends Component {
           <RoomList onLoad={this.setActiveRoom}
             firebase={firebase}
             activeRoom={this.state.activeRoom}
+            activeRoomKey={this.state.activeRoomKey}
             handleRoomClick={this.handleRoomClick}
           />
 

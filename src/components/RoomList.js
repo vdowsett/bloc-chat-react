@@ -9,11 +9,13 @@ class RoomList extends Component {
     this.state = {
         rooms: [],
         newRoom: '',
+        activeRoom: '',
       };
 
     this.roomsRef = this.props.firebase.database().ref('rooms');
     this.handleChange = this.handleChange.bind(this);
     this.createRoom = this.createRoom.bind(this);
+    this.deleteRoom = this.deleteRoom.bind(this);
    };
 
   componentDidMount() {
@@ -34,9 +36,27 @@ class RoomList extends Component {
     //const roomArray = this.state.rooms;
     this.roomsRef.push({
       name: newRoom
-    })
-    this.setState({ rooms: this.state.rooms.concat({ name: newRoom }) })
+    });
+    this.setState({ rooms: this.state.rooms.concat({ name: newRoom }) });
     this.setState({ newRoom: ""  });
+  }
+
+  deleteRoom() {
+
+    const roomKey = this.props.activeRoomKey;
+
+    const roomToRemove = this.props.firebase.database().ref( 'rooms/' + roomKey );
+
+    roomToRemove.remove()
+    .then(function() {
+        console.log("Removed from Firebase, Key: " + roomKey )
+      })
+      .catch(function(error) {
+        console.log("Remove failed: " + error.message)
+      });
+
+      this.setState({ rooms: [...this.state.rooms.filter(room => room.key !== roomKey)] });
+
   }
 
   render() {
@@ -47,7 +67,17 @@ class RoomList extends Component {
       <div id="roomList">
         <ul>
           { this.state.rooms.map( ( room, index ) =>
-          <li key={index} onClick={(e) => this.props.handleRoomClick(room)}> { room.name } </li>
+          <li key={index}>
+            <span id="room-item-text" onClick={(e) => this.props.handleRoomClick(room)}>
+              { room.name }
+            </span>
+            <button
+              type="submit"
+              value="Delete Room"
+              onClick={ this.deleteRoom }>
+              Delete Room
+            </button>
+        </li>
           )}
         </ul>
 
@@ -59,8 +89,11 @@ class RoomList extends Component {
             onChange={ this.handleChange }
           >
           </input>
-          <button type="submt" value="Add Room">Add Room</button>
+          <button type="submit" value="Add Room">Add Room</button>
         </form>
+
+
+
       </div>
 
     )}
